@@ -1,0 +1,3334 @@
+/* ============================================================
+   1. 基本設定 (GLOBAL SETTINGS)
+   ============================================================ */
+body {
+    background-color: #050505;
+    color: #e0e0e0;
+    font-family: "Hiragino Mincho ProN", "MS Mincho", serif;
+    margin: 0;
+    line-height: 1.8;
+}
+
+/* ヘッダー全体のレイアウト */
+header {
+    text-align: center;
+    padding: 60px 20px;
+    border-bottom: 1px solid #1a1a1a;
+}
+
+.top-header {
+    text-align: center;
+    padding: 80px 20px 50px;
+    background-color: #000;
+}
+
+/* メインタイトルと赤いサブタイトル */
+.main-title {
+    color: #e0e0e0;
+    font-family: 'serif';
+    font-size: 2.5rem;
+    letter-spacing: 0.1em;
+    margin: 0;
+}
+
+.main-title span {
+    display: block;
+    font-size: 0.9rem;
+    color: #8b0000;
+    /* 血の赤 */
+    margin-top: 15px;
+    letter-spacing: 0.3em;
+    font-weight: normal;
+}
+
+/* 導入文の装飾枠（左右の線） */
+.intro-text-wrapper {
+    max-width: 600px;
+    margin: 40px auto 0;
+    border-left: 1px solid #333;
+    border-right: 1px solid #333;
+    padding: 0 20px;
+}
+
+.intro-text-wrapper p {
+    color: #999;
+    font-size: 0.9rem;
+    line-height: 2;
+    text-align: justify;
+}
+
+.intro-text-wrapper strong {
+    color: #d2b48c;
+    /* 羊皮紙の色 */
+}
+
+/* じわじわ点滅するアニメーション設定 */
+.intro-text-wrapper span {
+    display: block;
+    margin-top: 20px;
+    font-size: 0.8rem;
+    color: #666;
+    animation: fadeInOut 3s infinite;
+}
+
+@keyframes fadeInOut {
+
+    0%,
+    100% {
+        opacity: 0.3;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+/* ロゴ・サブタイトル */
+.site-logo {
+    font-size: 3rem;
+    letter-spacing: 0.6em;
+    color: #8b4513;
+    margin: 0;
+}
+
+.site-sub {
+    font-size: 0.8rem;
+    color: #555;
+    letter-spacing: 0.2em;
+}
+
+
+/* ============================================================
+   2. 映画カード配置 (LAYOUT)
+   ============================================================ */
+.container {
+    padding: 60px 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* カードを横に並べる親要素の指定 */
+.movie-archive-list {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    justify-content: center;
+    gap: 40px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+
+/* ============================================================
+   3. カード個別のデザイン (CARD DESIGN)
+   ============================================================ */
+.movie-card {
+    flex: 0 0 320px;
+    /* 縮ませない設定 */
+    width: 320px;
+    min-height: 450px;
+    background: #0a0a0a;
+    border: 1px solid #222;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: 0.5s;
+}
+
+/* カードにマウスを乗せた時の動き */
+.movie-card:hover {
+    transform: translateY(-10px);
+    border-color: #8b0000;
+    box-shadow: 0 10px 30px rgba(139, 0, 0, 0.4);
+}
+
+.card-inner {
+    width: 100%;
+    text-align: center;
+    word-wrap: break-word;
+}
+
+.card-title {
+    font-size: 1.8rem;
+    letter-spacing: 0.15em;
+    margin: 20px 0;
+    line-height: 1.2;
+}
+
+.genre {
+    display: block;
+    font-size: 0.75rem;
+    color: #8b4513;
+    letter-spacing: 0.2em;
+    margin-bottom: 10px;
+}
+
+.card-tagline {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.click-info {
+    font-size: 0.8rem;
+    border-top: 1px solid #333;
+    padding-top: 10px;
+    width: 60%;
+    margin: 0 auto;
+    color: #888;
+}
+
+/* ナビゲーションボタンのホバー演出 */
+.nav-btn:hover {
+    background: rgba(139, 0, 0, 0.5);
+    /* 以前の0.3から調整済み */
+    color: white;
+    border-color: #8b0000;
+}
+
+/* ボタンの位置固定 */
+.prev-btn {
+    left: 20px;
+}
+
+.next-btn {
+    right: 20px;
+}
+
+/* コンジアム専用：監視モニターの青白さとノイズの影 */
+#card-gonjiam {
+    background: linear-gradient(135deg, #050505 0%, #0a1520 100%);
+    border: 1px solid #1a2a3a;
+    box-shadow: 0 0 15px rgba(0, 210, 255, 0.05);
+}
+
+/* ジャンル名：デジタルな青 */
+#card-gonjiam .genre {
+    color: #00d2ff;
+    border-bottom: 1px solid #005f73;
+}
+
+/* タイトル：少しノイズがかかったような白 */
+#card-gonjiam .card-title span {
+    color: #e0f7fa;
+    text-shadow: 0 0 8px rgba(0, 210, 255, 0.3);
+}
+
+/* キャッチコピー */
+#card-gonjiam .card-tagline {
+    color: #a0aec0;
+}
+
+/* タップ案内：監視カメラのUIっぽく */
+#card-gonjiam .click-info {
+    color: #00d2ff;
+    opacity: 0.6;
+    font-family: 'Courier New', Courier, monospace;
+    /* デジタル感 */
+}
+
+/* ホバー時の演出：画面が乱れるような発光 */
+#card-gonjiam:hover {
+    box-shadow: 0 0 25px rgba(0, 210, 255, 0.2);
+    border-color: #00d2ff;
+}
+
+/* 無効化されたカード全体のスタイル */
+.card-disabled {
+    cursor: not-allowed !important;
+    /* 選択不可のカーソル */
+    filter: grayscale(0.8) brightness(0.5);
+    /* 色を落として暗くする */
+    border: 1px dashed #4a5568 !important;
+    /* 境界線を破線にして未完成感を出す */
+    pointer-events: none;
+    /* クリックイベントを完全に無効化 */
+    position: relative;
+}
+
+/* 「現在制作中」のオーバーレイ */
+.status-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-15deg);
+    /* 斜めに配置 */
+    background: rgba(139, 0, 0, 0.8);
+    /* 深い赤 */
+    color: #fff;
+    padding: 5px 15px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+    border: 2px solid #fff;
+    white-space: nowrap;
+    z-index: 10;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}
+
+/* 下部のテキスト */
+.status-text {
+    color: #ff4d4d !important;
+    font-weight: bold;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    margin-top: 5px;
+}
+
+/* 制作中カードを少しだけ不気味に明滅させる（オプション） */
+.card-disabled:hover {
+    animation: pulse-dark 2s infinite;
+}
+
+@keyframes pulse-dark {
+    0% {
+        filter: grayscale(0.8) brightness(0.4);
+    }
+
+    50% {
+        filter: grayscale(0.9) brightness(0.6);
+    }
+
+    100% {
+        filter: grayscale(0.8) brightness(0.4);
+    }
+}
+
+/* ============================================================
+   3. モーダル基本 (MODAL WINDOW)
+   ============================================================ */
+
+/* モーダル全体のオーバーレイ（背景の黒い膜） */
+.modal {
+    display: none;
+    /* 初期状態は非表示 */
+    position: fixed;
+    /* 画面に固定 */
+    z-index: 999;
+    /* 最前面に表示 */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.98);
+    /* ほぼ真っ黒な背景 */
+    overflow-y: auto;
+    /* 中身が長い場合にスクロール可能にする */
+}
+
+/* モーダル内のコンテンツエリア */
+.modal-content {
+    background: #080808;
+    margin: 3% auto;
+    padding: 40px;
+    width: 95%;
+    max-width: 850px;
+    border: 1px solid #222;
+    position: relative;
+    box-sizing: border-box;
+}
+
+/* 「女神の継承」モーダル専用のカラー調整（上書き用） */
+#modal-medium .modal-content {
+    /* 祭壇の奥底のような深い緑のグラデーション */
+    background: radial-gradient(circle at top, #061106 0%, #050505 100%);
+    border: 1px solid #1a2f1a;
+}
+
+/* 祈祷師のタイ文字を彷彿とさせる装飾タイトル */
+#modal-medium .modal-blood-title {
+    color: #8b0000;
+    text-shadow: 0 0 10px rgba(139, 0, 0, 0.8);
+    font-family: 'serif';
+    /* タイ文字風のフォントがあれば指定 */
+}
+
+/* 閉じるボタン (右上) */
+.close-btn {
+    position: absolute;
+    right: 30px;
+    top: 20px;
+    font-size: 1rem;
+    color: #555;
+    cursor: pointer;
+    letter-spacing: 0.1em;
+}
+
+.close-btn:hover {
+    color: #fff;
+}
+
+/* モーダル内の血筋をイメージした赤タイトル */
+.modal-blood-title {
+    color: #a00000;
+    font-size: 2.2rem;
+    border-bottom: 1px solid #222;
+    padding-bottom: 10px;
+    margin-top: 0;
+}
+
+/* イントロダクション・セクションのレイアウト */
+.intro-section {
+    max-width: 800px;
+    margin: 40px auto 60px;
+    padding: 0 20px;
+}
+
+/* 導入文を囲む装飾ボックス */
+.intro-box {
+    background: rgba(20, 20, 20, 0.7);
+    border-top: 1px solid #444;
+    border-bottom: 1px solid #444;
+    padding: 30px;
+    position: relative;
+}
+
+/* ボックス左上の十字架「†」装飾 */
+.intro-box::before {
+    content: '†';
+    position: absolute;
+    top: 5px;
+    left: 10px;
+    color: #8b0000;
+    font-size: 1.2rem;
+}
+
+/* 導入文のテキストスタイル */
+.intro-text {
+    color: #ccc;
+    line-height: 2;
+    text-align: center;
+    font-size: 0.95rem;
+    letter-spacing: 0.05em;
+}
+
+/* 強調テキスト（発光する赤） */
+.intro-text strong {
+    color: #ff4444;
+    text-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+}
+
+
+/* ============================================================
+   4. 家系図レイアウト (FAMILY TREE)
+   ============================================================ */
+
+/* 家系図全体のコンテナ */
+.tree-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 40px 0;
+    overflow-x: auto;
+    /* スマホなどで横にはみ出た場合にスクロール可能にする */
+}
+
+/* 家系図の同じ階層（世代）の並び */
+.tree-level {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+/* キャラクター単体のカード（ノード） */
+.char-node {
+    width: 130px;
+    background: #111;
+    border: 1px solid #333;
+    padding: 10px;
+    text-align: center;
+    position: relative;
+    transition: 0.4s;
+}
+
+/* キャラクター画像エリア */
+.char-img {
+    width: 100%;
+    height: 90px;
+    background: #222;
+    margin-bottom: 8px;
+    overflow: hidden;
+}
+
+/* 画像の加工（モノクロ・高コントラスト） */
+.char-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(1) contrast(1.2);
+    /* 遺影のような不気味な演出 */
+    border: 1px solid #222;
+}
+
+.char-name {
+    font-size: 0.85rem;
+    color: #8b4513;
+    margin: 5px 0;
+    font-weight: bold;
+}
+
+.char-desc {
+    font-size: 0.65rem;
+    color: #777;
+    line-height: 1.3;
+}
+
+
+
+/* --- 特殊演出：カルト・死亡 --- */
+
+/* カルトメンバーの強調枠：血が滲むような赤 */
+.cult-member {
+    border: 2px solid #8b0000 !important;
+    background: rgba(139, 0, 0, 0.1) !important;
+}
+
+/* 死亡時の「DECEASED」スタンプ演出：斜めにスタンプ */
+.deceased::after {
+    content: "DECEASED";
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    color: rgba(255, 0, 0, 0.8);
+    border: 2px solid rgba(255, 0, 0, 0.8);
+    transform: rotate(-25deg);
+    padding: 5px;
+    font-size: 0.7rem;
+    font-weight: bold;
+    background: rgba(0, 0, 0, 0.6);
+    pointer-events: none;
+    letter-spacing: 0.1em;
+}
+
+/* 背景にうっすらとタイ文字風の紋章を置く場合 */
+.tree-container.medium-edition::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    background: url('https://www.transparenttextures.com/patterns/fabric-of-the-cosmos.png');
+    /* 古びた質感 */
+    opacity: 0.05;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
+/* --- 特殊演出：カルト・死亡 --- */
+
+/* カルトメンバーの強調枠 */
+.cult-member {
+    border: 1px solid #ff0000 !important;
+    background: rgba(139, 0, 0, 0.05) !important;
+}
+
+/* 注目時の拡大・発光演出 */
+.cult-highlight {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px #ff0000;
+    border-color: #ff0000 !important;
+    z-index: 10;
+}
+
+/* 死亡時の「DECEASED」スタンプ演出 */
+.deceased::after {
+    content: "DECEASED";
+    position: absolute;
+    top: 40%;
+    left: 10%;
+    color: rgba(255, 0, 0, 0.7);
+    border: 1px solid rgba(255, 0, 0, 0.7);
+    transform: rotate(-20deg);
+    /* スタンプっぽく斜めに傾ける */
+    padding: 2px;
+    font-size: 0.6rem;
+    background: rgba(0, 0, 0, 0.5);
+    pointer-events: none;
+    /* クリックの邪魔をしない */
+}
+
+/* --- 家系図の接続線 (CONNECTORS) --- */
+
+/* 垂直方向の線 */
+.connector-v {
+    width: 1px;
+    height: 30px;
+    background: #333;
+}
+
+/* 水平方向の線 */
+.connector-h {
+    width: 30px;
+    height: 1px;
+    background: #333;
+    align-self: center;
+}
+
+/* 水平方向の点線（特殊なつながり等） */
+.connector-h.dashed {
+    border-top: 1px dashed #444;
+    background: none;
+}
+
+
+
+/* ============================================================
+   女神の継承：家系図レイアウト（決定版）
+   ============================================================ */
+
+/* 1. コンテナ：中央寄せと全体の余白 */
+.family-tree.medium-edition {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 80px auto;
+    max-width: 1000px;
+    position: relative;
+    padding-bottom: 40px;
+    /* 下側の内余白 */
+}
+
+/* 2. 各世代の並び：ここを修正！横に並べる */
+.bloodline {
+    display: flex;
+    /* 横並びにする */
+    justify-content: center;
+    /* 中央に寄せる */
+    align-items: center;
+    gap: 20px;
+    /* カード同士の間隔 */
+    width: 100%;
+    margin: 0 auto;
+}
+
+/* 3. キャラクターカードの設定 */
+.char-node {
+    width: 140px;
+    background: #111;
+    border: 1px solid #3a2a1a;
+    padding: 15px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+.char-img {
+    width: 100%;
+    height: 100px;
+    background: #222;
+    margin-bottom: 8px;
+    border: 1px solid #1a1a1a;
+}
+
+.char-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(1) contrast(1.2);
+}
+
+/* 4. 接続線：位置を安定させる */
+.connector-v {
+    width: 2px;
+    height: 40px;
+    background: #3a2a1a;
+    margin: 10px auto;
+}
+
+.connector-h {
+    width: 40px;
+    height: 1px;
+    background: #3a2a1a;
+    flex-shrink: 0;
+    /* 線が潰れないように固定 */
+}
+
+.connector-h.dashed {
+    background: none;
+    border-top: 1px dashed #600;
+}
+
+/* 5. 下の文章ボックス：確実にスペースを空ける */
+.family-tree.medium-edition .note-box {
+    margin-top: 80px;
+    /* ★ここでしっかり隙間を作る */
+    background: rgba(139, 69, 19, 0.1);
+    border: 1px dashed #8b4513;
+    padding: 25px;
+    width: 90%;
+    max-width: 600px;
+    color: #bbb;
+    font-style: italic;
+    line-height: 1.8;
+    text-align: center;
+}
+
+.connector-v {
+    margin: 20px auto;
+    /* 上下の余白を均等に */
+}
+
+/* 各世代（血筋）の並び：横並びにする */
+.bloodline {
+    display: flex;
+    justify-content: center;
+    /* 遺影を中央寄せにする */
+    align-items: flex-start;
+    gap: 40px;
+    /* 遺影同士の間隔 */
+    width: 100%;
+    margin: 0;
+}
+
+/* キャラクター単体のカード（遺影）：ヘレディタリーと同じスタイル */
+.char-node {
+    width: 150px;
+    /* 130pxから少し大きく調整 */
+    background: #111;
+    border: 1px solid #3a2a1a;
+    /* 古びた境界線 */
+    padding: 15px;
+    text-align: center;
+    position: relative;
+    transition: all 0.4s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+/* 画像エリア：画像をモノクロ・高コントラストに */
+.char-img {
+    width: 100%;
+    height: 110px;
+    /* 画像の高さを調整 */
+    background: #222;
+    margin-bottom: 10px;
+    overflow: hidden;
+    border: 1px solid #1a1a1a;
+}
+
+.char-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(1) contrast(1.2);
+    /* 遺影のような不気味な演出 */
+}
+
+/* 名前と説明テキストの調整 */
+.char-name {
+    font-size: 1rem;
+    /* 文字を少し大きく */
+    color: #d2b48c;
+    /* 羊皮紙色 */
+    margin: 8px 0 5px;
+    font-weight: bold;
+    letter-spacing: 0.1em;
+    font-family: "Hiragino Mincho ProN", serif;
+    /* 明朝体で雰囲気アップ */
+    text-shadow: 0 0 5px rgba(210, 180, 140, 0.3);
+}
+
+.char-desc {
+    font-size: 0.75rem;
+    color: #999;
+    line-height: 1.4;
+}
+
+/* --- 家系図の接続線（CONNECTORS）：中央寄せを前提とした調整 --- */
+
+/* 垂直方向の線（世代間を繋ぐ） */
+.connector-v {
+    width: 2px;
+    /* 少し太く */
+    height: 40px;
+    background: #3a2a1a;
+    /* 古びた色 */
+    margin: 0 auto;
+    /* 中央に配置 */
+}
+
+/* 水平方向の線（結婚や兄妹関係を繋ぐ）：flexの子要素として調整 */
+.connector-h {
+    width: 50px;
+    height: 1px;
+    background: #3a2a1a;
+    align-self: center;
+    /* 遺影と高さを合わせる */
+    margin: 0 -20px;
+    /* 遺影と重なるように微調整 */
+}
+
+/* 水平方向の点線（拒絶や自殺など、不確かな繋がり） */
+.connector-h.dashed {
+    border-top: 1px dashed #600;
+    /* 赤い点線 */
+    background: none;
+}
+
+/* ============================================================
+   5. 起承転結アコーディオン (STORY ACCORDION)
+   ============================================================ */
+
+/* アコーディオンを縦に並べるコンテナ */
+.accordion-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+/* 各ストーリーセクションの枠 */
+.story-detail {
+    background: #0d0d0d;
+    border: 1px solid #222;
+    transition: 0.3s;
+}
+
+/* クリックする見出し部分 */
+.story-header {
+    padding: 20px;
+    cursor: pointer;
+    list-style: none;
+    /* デフォルトの三角を消す(一般) */
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: #111;
+}
+
+/* Chrome/Safari用の三角消し */
+.story-header::-webkit-details-marker {
+    display: none;
+}
+
+.story-header:hover {
+    background: #1a1a1a;
+}
+
+/* 左側の「起・承・転・結」などの四角いラベル */
+.arc-step {
+    background: #8b4513;
+    color: #fff;
+    min-width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+/* 章のタイトル */
+.arc-title {
+    font-size: 1rem;
+    color: #ccc;
+    letter-spacing: 0.05em;
+}
+
+/* クライマックスや衝撃の展開用の赤強調設定 (red-alertクラス) */
+.red-alert {
+    border-color: #600;
+}
+
+.red-alert .arc-step {
+    background: #a00;
+}
+
+.red-alert .arc-title {
+    color: #ff4444;
+}
+
+/* 開いた時に現れる本文エリア */
+.story-body {
+    padding: 25px;
+    color: #bbb;
+    font-size: 0.95rem;
+    background: #050505;
+    border-top: 1px solid #222;
+    text-align: justify;
+}
+
+/* アコーディオンが開く時のアニメーション */
+.story-detail[open] .story-body {
+    animation: slideDown 0.4s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* ============================================================
+   6. ネタバレ警告セクション (SPOILER WARNING)
+   ============================================================ */
+
+/* 警告エリア全体の外枠 */
+.spoiler-wrapper {
+    margin: 60px auto;
+    border: 1px solid #8b0000;
+    background: #050505;
+    max-width: 900px;
+}
+
+/* 警告見出しのデザイン（真っ赤な背景） */
+.spoiler-accordion summary {
+    padding: 25px;
+    list-style: none;
+    cursor: pointer;
+    background: #100000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #4a0000;
+}
+
+.spoiler-accordion summary::-webkit-details-marker {
+    display: none;
+}
+
+/* 左側の警告アイコンとテキストのまとまり */
+.warning-header {
+    display: flex;
+    align-items: center;
+}
+
+/* 脈動する警告アイコン（!マークなど） */
+.warning-icon {
+    font-size: 2rem;
+    color: #ff0000;
+    margin-right: 20px;
+    animation: pulsate 2s infinite ease-in-out;
+}
+
+.warning-text strong {
+    color: #ff4444;
+    font-size: 1.1rem;
+    letter-spacing: 0.1em;
+}
+
+/* 右側の「OPEN」ボタン風デザイン */
+.click-to-open {
+    font-size: 0.8rem;
+    color: #ff4444;
+    border: 1px solid #8b0000;
+    padding: 5px 15px;
+    transition: 0.3s;
+}
+
+.spoiler-accordion summary:hover .click-to-open {
+    background: #8b0000;
+    color: #fff;
+}
+
+/* ネタバレ本文エリア */
+.spoiler-inner {
+    padding: 20px;
+    animation: fadeIn 0.8s ease-out;
+}
+
+/* --- 特殊アニメーション定義 --- */
+
+/* アイコンがボワボワ光る（鼓動）アニメーション */
+@keyframes pulsate {
+    0% {
+        opacity: 0.5;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.1);
+        text-shadow: 0 0 10px #ff0000;
+    }
+
+    100% {
+        opacity: 0.5;
+        transform: scale(1);
+    }
+}
+
+/* パッと現れるフェードイン */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ============================================================
+   7. 伏線タイムライン (CLUE TIMELINE)
+   ============================================================ */
+
+/* タイムライン全体の容器（左側の縦線が「運命の糸」） */
+.timeline-container {
+    position: relative;
+    max-width: 800px;
+    margin: 40px auto;
+    padding-left: 30px;
+    border-left: 1px solid #333;
+    /* 運命の縦線 */
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 50px;
+}
+
+/* タイムライン上の点（左側の丸い点） */
+.timeline-item::before {
+    content: "";
+    position: absolute;
+    left: -35px;
+    top: 5px;
+    width: 10px;
+    height: 10px;
+    background: #8b4513;
+    border: 2px solid #050505;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+/* 時系列を示すラベル */
+.time-marker {
+    font-size: 0.75rem;
+    color: #8b4513;
+    letter-spacing: 0.2em;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+/* 伏線内容のカード */
+.timeline-content {
+    background: #0d0d0d;
+    padding: 20px;
+    border: 1px solid #1a1a1a;
+    transition: 0.3s;
+}
+
+/* ホバーで少し右にずれる演出 */
+.timeline-content:hover {
+    border-color: #600;
+    transform: translateX(10px);
+}
+
+.timeline-content h4 {
+    margin-top: 0;
+    color: #ff4444;
+    font-size: 1.1rem;
+}
+
+
+/* ============================================================
+   8. 悪魔解説セクション (DEMON PROFILE)
+   ============================================================ */
+
+.demon-profile {
+    margin-top: 80px;
+    padding: 40px;
+    background-color: #080808;
+    border: 1px solid #4a3b2b;
+    color: #d2b48c;
+    /* 古紙のようなベージュ色 */
+    position: relative;
+    /* 背景の紋章配置用 */
+}
+
+/* 悪魔の階級や名前 */
+.profile-header {
+    border-bottom: 2px solid #8b4513;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+}
+
+.rank {
+    font-size: 0.8rem;
+    color: #ff4444;
+    font-weight: bold;
+    letter-spacing: 0.3em;
+}
+
+/* 注釈ボックス（古いメモ書き風） */
+.note-box {
+    background: rgba(139, 69, 19, 0.1);
+    border: 1px dashed #8b4513;
+    padding: 15px;
+    font-size: 0.85rem;
+    font-style: italic;
+    color: #bbb;
+}
+
+/* 悪魔の姿や紋章の画像（セピア調の加工） */
+.paimon-img,
+.paimon-seal {
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    border: 1px solid #4a3b2b;
+    padding: 8px;
+    background: #000;
+    filter: sepia(30%) contrast(110%);
+    /* 少し茶色く古ぼけさせる */
+    transition: filter 0.5s ease;
+}
+
+/* ホバーで画像が本来の色（鮮明）に戻る演出 */
+.paimon-img:hover,
+.paimon-seal:hover {
+    filter: sepia(0%) contrast(120%);
+}
+
+/* 背景にうっすら浮かび上がる巨大な紋章 */
+.demon-profile::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 400px;
+    height: 400px;
+    background: url('paimon_seal.png') no-repeat center;
+    background-size: contain;
+    opacity: 0.03;
+    /* ほとんど見えないくらいの薄さ */
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
+
+/* ============================================================
+   9. 深層考察：禁断の写本（DEEP ANALYSIS RE-DESIGN）
+   ============================================================ */
+
+.deep-analysis {
+    background: #080808;
+    border: 1px solid #3a2a1a;
+    /* 額縁のような古びた境界線 */
+    border-left: 8px solid #600;
+    /* 左側のラインをより重厚に */
+    padding: 50px 40px;
+    margin-top: 50px;
+    position: relative;
+    /* 羊皮紙のような質感をうっすら追加 */
+    background-image: radial-gradient(circle at center, rgba(20, 15, 10, 0.8) 0%, #050505 100%);
+}
+
+/* 考察ブロックの各見出し（なぜ「3体の首なし」なのか 等） */
+.analysis-block h4 {
+    color: #d2b48c;
+    /* 羊皮紙色 */
+    font-family: "Hiragino Mincho ProN", serif;
+    font-size: 1.5rem;
+    border-bottom: 1px solid #4a3b2b;
+    padding-bottom: 15px;
+    margin-bottom: 25px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 1);
+    letter-spacing: 0.15em;
+}
+
+/* 本文テキスト：行間を少し詰め、古書のような密度に */
+.analysis-block p {
+    color: #a0a0a0;
+    line-height: 1.9;
+    text-align: justify;
+    margin-bottom: 25px;
+}
+
+/* 比較表：石板や古い木箱に刻まれたようなデザイン */
+.comparison-table table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 30px 0;
+    background: rgba(10, 10, 10, 0.5);
+}
+
+.comparison-table th {
+    background: #1a1510;
+    /* 焦げ茶色 */
+    color: #8b4513;
+    border: 1px solid #3a2a1a;
+    padding: 15px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.comparison-table td {
+    border: 1px solid #2a1a0a;
+    padding: 15px;
+    color: #888;
+    font-size: 0.9rem;
+    vertical-align: middle;
+}
+
+/* 表内の強調文字を血のような色に */
+.comparison-table td strong {
+    color: #8b0000;
+}
+
+/* 背景にうっすらと「しみ」や「汚れ」のようなテクスチャを出す（疑似要素） */
+.deep-analysis::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url("https://www.transparenttextures.com/patterns/clean-gray-paper.png");
+    /* 微細なノイズ */
+    opacity: 0.1;
+    pointer-events: none;
+}
+
+/* 配信・購入情報（事務的な切り取り線演出） */
+/* ============================================================
+   10. 配信情報（サイズ復元・雰囲気強化版）
+   ============================================================ */
+.streaming-info {
+    margin: 60px auto;
+    max-width: 800px;
+    /* 少し広げてゆとりを */
+    padding: 50px 30px;
+    background: #0a0a0a;
+    border: 1px solid #1a1a1a;
+    position: relative;
+    text-align: center;
+}
+
+/* 「この絶望を〜」のタイトルを1枚目のように力強く */
+.info-title {
+    color: #8b0000;
+    font-size: 1.8rem;
+    /* サイズアップ */
+    margin-bottom: 20px;
+    letter-spacing: 0.2em;
+    text-shadow: 0 0 15px rgba(139, 0, 0, 0.6);
+}
+
+.stream-buttons {
+    display: flex;
+    flex-direction: column;
+    /* 1枚目のように縦に積む */
+    gap: 15px;
+    margin: 30px 0;
+}
+
+/* ボタンのサイズを1枚目ベースに復元 */
+.stream-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 25px;
+    /* 1枚目のようなボリューム感 */
+    text-decoration: none;
+    transition: all 0.4s ease;
+    border: 1px solid transparent;
+}
+
+/* Amazon：彩度を少し抑えつつ、巨大な面積を維持 */
+.stream-btn.amzn {
+    background: #d89634;
+    /* 1枚目に近いオレンジを少し煤けさせた色 */
+    color: #000;
+}
+
+/* U-NEXT：1枚目の水色を夜の闇に馴染ませた色 */
+.stream-btn.unext {
+    background: #6bbce0;
+    color: #000;
+}
+
+/* Hulu：ブランドの黄緑色を、毒々しくも深みのある苔色に */
+.stream-btn.hulu {
+    background: #41811e;
+    /* 少し暗めのライムグリーン */
+    color: #fff;
+}
+
+/* Apple TV：Appleのミニマリズムを、冷たい鉄のようなグレーに */
+.stream-btn.apple {
+    background: #444444;
+    /* 鈍い光沢を感じさせるダークグレー */
+    color: #fff;
+}
+
+/* Google TV：Googleの赤を、古びた血のようなダークレッドに */
+.stream-btn.google {
+    background: #8b0000;
+    /* 深い赤（ダークレッド） */
+    color: #fff;
+}
+
+/* ホバー：サイズ感はそのままで、不気味に発光 */
+.stream-btn:hover {
+    transform: scale(1.02);
+    /* 巨大なまま少しだけ迫ってくる */
+    filter: brightness(1.2) contrast(1.1);
+    box-shadow: 0 0 30px rgba(139, 0, 0, 0.4);
+    border-color: #8b0000;
+}
+
+/* ボタン内の文字デザイン */
+.btn-label {
+    font-size: 0.8rem;
+    margin-bottom: 5px;
+    opacity: 0.8;
+}
+
+.btn-action {
+    font-size: 1.2rem;
+    font-weight: bold;
+    letter-spacing: 0.1em;
+}
+
+
+/* ============================================================
+   11. おすすめ映画 (RECOMMENDATIONS)
+   ============================================================ */
+
+.recommend-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.recommend-card {
+    background: #111;
+    border: 1px solid #333;
+    padding: 20px;
+    transition: 0.3s;
+}
+
+.recommend-card:hover {
+    border-color: #8b0000;
+    transform: translateY(-5px);
+}
+
+/* 「必見」などのラベル */
+.card-badge {
+    display: inline-block;
+    background: #8b0000;
+    color: #fff;
+    font-size: 0.7rem;
+    padding: 2px 8px;
+    font-weight: bold;
+}
+
+/* ============================================================
+   12. フッター & 固定ナビゲーション (FOOTER & FLOATING UI)
+   ============================================================ */
+
+/* フッター全体：サイトの終焉を演出するエリア */
+.site-footer {
+    background: #050505;
+    /* 漆黒 */
+    color: #888;
+    padding: 60px 20px 30px;
+    border-top: 1px solid #222;
+    font-family: 'serif';
+    position: relative;
+    overflow: hidden;
+}
+
+.footer-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* フッターのロゴ：羊皮紙×深紅の配色 */
+.footer-logo {
+    color: #d2b48c;
+    /* 羊皮紙の色 */
+    font-size: 1.5rem;
+    letter-spacing: 0.3em;
+    margin-bottom: 10px;
+}
+
+.footer-logo span {
+    display: block;
+    font-size: 0.7rem;
+    color: #8b0000;
+    /* 深紅 */
+    letter-spacing: 0.1em;
+    margin-top: 5px;
+}
+
+/* 最後のメッセージ：斜体（italic）で不気味な余韻を出す */
+.footer-message {
+    font-size: 0.85rem;
+    line-height: 1.8;
+    margin-bottom: 40px;
+    color: #666;
+    font-style: italic;
+}
+
+/* フッター下部：著作権表示など */
+.footer-bottom {
+    border-top: 1px solid #1a1a1a;
+    padding-top: 25px;
+}
+
+.copyright {
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+    color: #444;
+}
+
+/* --- 浮遊ボタン（トップへ戻る / HOME） --- */
+
+/* 共通設定：画面右下に固定される赤いボタン */
+.back-to-top,
+.home-button {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: rgba(10, 0, 0, 0.8);
+    /* 闇に溶ける黒赤 */
+    border: 1px solid #8b0000;
+    /* 深紅の縁取り */
+    color: #8b0000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    z-index: 999;
+}
+
+/* トップへ戻るボタン固有のサイズ */
+.back-to-top {
+    width: 45px;
+    height: 45px;
+    border-radius: 5px;
+    /* 少し角を残すのがこだわり */
+    transition: all 0.3s ease;
+}
+
+/* HOMEボタン固有のサイズとアニメーション */
+.home-button {
+    width: 50px;
+    height: 50px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ホバー時の発光演出：浮き上がりながら赤く光る */
+.back-to-top:hover,
+.home-button:hover {
+    background: #8b0000;
+    color: #fff;
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: 0 0 20px rgba(139, 0, 0, 0.7);
+    /* 赤い後光 */
+}
+
+/* アイコン（SVG）のサイズ調整 */
+.back-to-top svg {
+    width: 20px;
+    height: 20px;
+}
+
+
+
+/* ============================================================
+   女神の継承の伏線回収セクション（EVIDENCE ARCHIVE）
+   ============================================================ */
+/* 閲覧注意の枠 */
+.archive-details {
+    max-width: 900px;
+    margin: 40px auto;
+    border: 1px solid #400;
+    background: #050505;
+}
+
+/* クリックするバーの部分 */
+.archive-summary {
+    padding: 20px;
+    color: #e00;
+    font-weight: bold;
+    cursor: pointer;
+    list-style: none;
+    /* デフォルトの三角を消す */
+    text-align: center;
+    background: linear-gradient(to bottom, #1a0000, #000);
+    transition: 0.3s;
+}
+
+.archive-summary:hover {
+    background: #300;
+}
+
+.warning-icon {
+    margin-right: 10px;
+}
+
+.open-guide {
+    display: block;
+    font-size: 0.7rem;
+    color: #666;
+    margin-top: 5px;
+}
+
+/* 開いたときの演出 */
+.archive-details[open] .archive-summary {
+    border-bottom: 1px solid #400;
+    color: #888;
+}
+
+/* 既存の foreshadowing-section の余白調整 */
+.foreshadowing-section {
+    margin-top: 0;
+    border: none;
+}
+
+.foreshadowing-section {
+    background: #0a0a0a;
+    border: 1px solid #330000;
+    padding: 40px 20px;
+    margin: 60px auto;
+    max-width: 900px;
+    position: relative;
+    box-shadow: inset 0 0 50px rgba(139, 0, 0, 0.1);
+}
+
+.archive-title {
+    color: #8b0000;
+    font-size: 1.4rem;
+    text-align: center;
+    margin-bottom: 40px;
+    letter-spacing: 0.2em;
+    font-family: 'Times New Roman', serif;
+}
+
+.archive-title span {
+    display: block;
+    font-size: 0.8rem;
+    color: #666;
+    margin-top: 5px;
+}
+
+.archive-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* 2列並び */
+    gap: 30px;
+}
+
+.archive-item {
+    background: rgba(20, 20, 20, 0.8);
+    border-left: 3px solid #600;
+    padding: 20px;
+    transition: transform 0.3s ease;
+}
+
+.archive-item:hover {
+    transform: translateY(-5px);
+    background: rgba(30, 10, 10, 0.9);
+}
+
+.archive-label {
+    font-size: 0.7rem;
+    color: #e00;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    opacity: 0.7;
+}
+
+.archive-subject {
+    color: #d2b48c;
+    /* 羊皮紙色 */
+    font-size: 1rem;
+    margin-bottom: 12px;
+    font-weight: bold;
+}
+
+.archive-text {
+    font-size: 0.85rem;
+    color: #999;
+    line-height: 1.6;
+    text-align: justify;
+}
+
+/* 関連グループの枠組みを強化 */
+.archive-group {
+    grid-column: 1 / -1;
+    border: 1px solid #300;
+    /* 境界線を少しはっきりさせる */
+    padding: 30px 20px;
+    background: rgba(10, 0, 0, 0.4);
+    margin: 20px 0;
+    position: relative;
+}
+
+/* グループタイトルの装飾 */
+.group-header {
+    font-size: 0.75rem;
+    color: #e00;
+    background: #000;
+    padding: 0 15px;
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    letter-spacing: 0.4em;
+    border: 1px solid #300;
+}
+
+/* ネストされたコンテナ */
+.archive-container.nested {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* 矢印（relation-arrow）の装飾 */
+.relation-arrow {
+    color: #444;
+    /* あえて暗めにして不気味さを出す */
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    white-space: nowrap;
+    animation: pulse 2s infinite;
+    /* ゆっくり明滅させる */
+}
+
+/* 偽装（A）側のスタイル：少しぼかす */
+.archive-item.status-deception {
+    border-left: 3px solid #555;
+    flex: 1;
+}
+
+/* 実体（B）側のスタイル：強調する */
+.archive-item.status-entity {
+    border-left: 3px solid #e00;
+    background: rgba(40, 0, 0, 0.3);
+    flex: 1;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 0.3;
+    }
+
+    50% {
+        opacity: 0.8;
+    }
+
+    100% {
+        opacity: 0.3;
+    }
+}
+
+/* ============================================================
+   歴史的背景の解説
+   ============================================================ */
+.real-lore-section {
+    max-width: 900px;
+    margin: 60px auto;
+    padding: 40px;
+    background: #111;
+    border-top: 1px solid #444;
+}
+
+.lore-title {
+    color: #d2b48c;
+    font-size: 1.2rem;
+    text-align: center;
+    margin-bottom: 30px;
+    letter-spacing: 0.15em;
+}
+
+.lore-content {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.lore-box {
+    padding: 15px;
+    border: 1px solid #222;
+}
+
+.lore-box h4 {
+    color: #e00;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #300;
+    padding-bottom: 5px;
+}
+
+.lore-box p {
+    font-size: 0.8rem;
+    color: #999;
+    line-height: 1.6;
+}
+
+
+/*=============================
+         コンジアム
+=============================*/
+
+/* コンジアム専用のモーダルヘッダー装飾 */
+.gonjiam-style {
+    background: linear-gradient(135deg, #050505 0%, #0a1520 100%);
+    border-bottom: 2px solid #00d2ff;
+    /* 監視モニターの青 */
+    padding: 30px;
+    text-align: center;
+}
+
+/* モーダル内のタイトル：デジタルな発光演出 */
+.gonjiam-style .modal-blood-title {
+    color: #e0f7fa;
+    text-shadow: 0 0 15px rgba(0, 210, 255, 0.6);
+    letter-spacing: 0.3em;
+}
+
+/* イントロボックス：無機質なブルーグレーの枠 */
+.gonjiam-style+.intro-section .intro-box {
+    border-left: 3px solid #00d2ff;
+    background: rgba(0, 210, 255, 0.05);
+    padding: 20px;
+}
+
+
+
+/*=============================
+         エスター
+=============================*/
+
+/* エスターカード：冷淡なブルーグレーと深みのある黒 */
+#card-orphan {
+    background: linear-gradient(135deg, #0d1117 0%, #1a1c23 100%);
+    border: 1px solid #2d3748;
+}
+
+#card-orphan .genre {
+    color: #a0aec0;
+    /* 無機質なグレー */
+}
+
+#card-orphan .card-title span {
+    color: #f8fafc;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+}
+
+/* モーダルヘッダー：クラシックで冷たい印象 */
+.orphan-style {
+    background: #0a0a0a;
+    border-bottom: 2px solid #2d3748;
+    padding: 30px;
+    text-align: center;
+}
+
+.orphan-style .modal-blood-title {
+    color: #ffffff;
+    letter-spacing: 0.4em;
+    font-weight: 300;
+}
+
+/*エスター家系図*/
+/* 全体コンテナ：一画面サイズ */
+/* --- エスター家系図コンテナ（一画面完結版） --- */
+.esther-tree-wrapper {
+    width: 100%;
+    height: 750px;
+    background: #0a0a0c;
+    position: relative;
+    border: 1px solid #2d3748;
+    overflow: hidden;
+    color: #fff;
+    font-family: "MS P明朝", "MS PMincho", "Sawarabi Mincho", serif;
+}
+
+/* --- モード切替スイッチ --- */
+.mode-switcher {
+    position: absolute;
+    top: 25px;
+    left: 25px;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 46px;
+    height: 24px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #333;
+    transition: .4s;
+    border-radius: 24px;
+    border: 1px solid #555;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 4px;
+    bottom: 3px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked+.slider {
+    background-color: #8b0000;
+    border-color: #ff0000;
+}
+
+input:checked+.slider:before {
+    transform: translateX(22px);
+}
+
+#mode-label {
+    font-size: 0.9rem;
+    letter-spacing: 0.2em;
+    transition: color 0.3s;
+}
+
+/* --- 人物ノードの基本設定 --- */
+.node {
+    position: absolute;
+    width: 160px;
+    text-align: center;
+    transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+    z-index: 10;
+}
+
+.photo-box {
+    width: 110px;
+    height: 140px;
+    background: #1a1a1a;
+    border: 1px solid #3e4b5e;
+    margin: 0 auto;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    transition: all 0.5s ease;
+}
+
+.label-area {
+    margin-top: 10px;
+}
+
+.name {
+    display: block;
+    font-size: 1.1rem;
+    font-weight: bold;
+    letter-spacing: 0.1em;
+    margin-bottom: 4px;
+}
+
+.desc {
+    font-size: 0.75rem;
+    color: #94a3b8;
+    margin: 0;
+}
+
+.cause-reveal {
+    display: none;
+    font-size: 0.8rem;
+    color: #ff4d4d;
+    font-weight: bold;
+    margin-top: 5px;
+    line-height: 1.4;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
+}
+
+/* --- 状態別デザイン演出 --- */
+
+/* 1. 死亡（赤×印） */
+.x-mark {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 7rem;
+    color: rgba(220, 20, 60, 0.8);
+    font-family: 'Arial', sans-serif;
+    z-index: 15;
+    pointer-events: none;
+}
+
+/* 2. 重症・瀕死（赤い亀裂とノイズ） */
+.critical-overlay {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, rgba(255, 0, 0, 0.3) 0%, transparent 100%);
+    box-shadow: inset 0 0 20px #ff0000;
+    z-index: 12;
+}
+
+.critical-style::after {
+    content: "";
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: repeating-linear-gradient(135deg, transparent, transparent 10px, rgba(255, 255, 255, 0.05) 11px);
+    z-index: 13;
+    pointer-events: none;
+}
+
+/* --- キャラクター個別配置（一画面最適化） --- */
+.esther {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.john {
+    top: 8%;
+    left: 18%;
+}
+
+.kate {
+    top: 8%;
+    left: 82%;
+    transform: translateX(-100%);
+}
+
+.daniel {
+    top: 70%;
+    left: 18%;
+}
+
+.max {
+    top: 70%;
+    left: 82%;
+    transform: translateX(-100%);
+}
+
+.abigail {
+    top: 38%;
+    left: 10%;
+}
+
+/* 外部協力者/犠牲者 */
+
+/* --- 裏モード (mode-reveal) 発動時の挙動 --- */
+.mode-reveal .photo-box {
+    filter: grayscale(1) brightness(0.7) contrast(1.2);
+    border-color: #ff0000;
+}
+
+.mode-reveal .dead-style .x-mark {
+    display: block;
+    animation: bloodFade 0.4s ease-in forwards;
+}
+
+.mode-reveal .critical-style .critical-overlay,
+.mode-reveal .critical-style::after {
+    display: block;
+}
+
+.mode-reveal .desc {
+    display: none;
+}
+
+.mode-reveal .cause-reveal {
+    display: block;
+}
+
+/* エスターだけは「×」がつかず、捕食者のように際立つ */
+.mode-reveal .esther {
+    transform: translate(-50%, -50%) scale(1.15);
+    z-index: 30;
+}
+
+.mode-reveal .esther .photo-box {
+    filter: none;
+    border-color: #fff;
+    box-shadow: 0 0 25px rgba(255, 0, 0, 0.5);
+}
+
+.mode-reveal .esther .x-mark {
+    display: none;
+}
+
+/* --- 関係線（相関図ライン） --- */
+.lines-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.line {
+    position: absolute;
+    background: #2d3748;
+    transition: all 0.5s;
+    opacity: 0.6;
+}
+
+.line-couple {
+    top: 18%;
+    left: 25%;
+    width: 50%;
+    height: 1px;
+}
+
+.line-vertical {
+    top: 18%;
+    left: 50%;
+    width: 1px;
+    height: 60%;
+}
+
+.line-horizontal {
+    top: 78%;
+    left: 25%;
+    width: 50%;
+    height: 1px;
+}
+
+.line-abigail {
+    top: 48%;
+    left: 15%;
+    width: 25%;
+    height: 1px;
+    border-top: 1px dashed #4a5568;
+    background: none;
+}
+
+/* 裏モード時は線が「血の繋がり」のように赤く光る */
+.mode-reveal .line {
+    background: #ff0000;
+    opacity: 0.3;
+}
+
+.mode-reveal .line-abigail {
+    border-top-color: #ff0000;
+}
+
+/* アニメーション：×印が浮かび上がる */
+@keyframes bloodFade {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(1.5);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+
+
+
+
+/*起承転結*/
+/* ネタバレ警告 */
+.spoiler-alert {
+    background: rgba(139, 0, 0, 0.1);
+    border: 1px solid var(--accent-red);
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.alert-icon {
+    font-size: 2.5rem;
+    color: var(--blood-red);
+    font-weight: bold;
+}
+
+.alert-text strong {
+    color: var(--blood-red);
+    font-size: 1.1rem;
+    letter-spacing: 0.1em;
+}
+
+.alert-text p {
+    margin: 5px 0 0 0;
+    font-size: 0.85rem;
+    color: #cbd5e0;
+}
+
+/* アコーディオン設定 */
+.accordion-container {
+    border-top: 1px solid #2d3748;
+}
+
+.arc-detail {
+    border-bottom: 1px solid #2d3748;
+    background: rgba(255, 255, 255, 0.02);
+    transition: background 0.3s;
+}
+
+.arc-detail[open] {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* クリック部分 */
+summary {
+    list-style: none;
+    padding: 25px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    position: relative;
+    outline: none;
+}
+
+summary::-webkit-details-marker {
+    display: none;
+}
+
+.arc-label {
+    color: var(--blood-red);
+    font-weight: bold;
+    font-size: 0.9rem;
+    width: 60px;
+}
+
+.arc-subtitle {
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: bold;
+    letter-spacing: 0.1em;
+}
+
+.plus-icon {
+    position: absolute;
+    right: 25px;
+    font-size: 1.5rem;
+    color: #4a5568;
+    transition: transform 0.3s;
+}
+
+.arc-detail[open] .plus-icon {
+    transform: rotate(45deg);
+    color: var(--blood-red);
+}
+
+/* 開いたときの中身 */
+.arc-content {
+    padding: 0 25px 30px 85px;
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: #cbd5e0;
+    animation: slideDown 0.4s ease-out;
+}
+
+/* 中身にある真実（UV演出） */
+.uv-truth {
+    margin-top: 20px;
+    padding: 15px;
+    background: rgba(188, 19, 254, 0.05);
+    border-left: 3px solid #bc13fe;
+    color: #bc13fe;
+    font-weight: bold;
+    text-shadow: 0 0 10px rgba(188, 19, 254, 0.3);
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/*エスター診療資料*/
+/* 記録セクション全体 */
+/* --- 診療記録セクション全体 --- */
+.medical-record-section {
+    max-width: 850px;
+    /* 写真スペース確保のため少し広く */
+    margin: 60px auto;
+    padding: 20px;
+    font-family: "MS P明朝", "MS PMincho", serif;
+}
+
+/* フォルダのタブ */
+.folder-tab {
+    background: #4a5568;
+    color: #edf2f7;
+    width: fit-content;
+    padding: 8px 24px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    border-radius: 8px 8px 0 0;
+    letter-spacing: 0.1em;
+}
+
+/* 書類本体（古い紙の質感） */
+.record-paper {
+    background: #e2e8f0;
+    color: #1a202c;
+    padding: 50px;
+    /* 余白を広く */
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+    position: relative;
+    border: 1px solid #a0aec0;
+    overflow: hidden;
+    /* スタンプのはみ出し対策 */
+}
+
+/* --- 【追加】写真エリアの装飾 --- */
+.photo-clip-area {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    width: 180px;
+    text-align: center;
+    z-index: 10;
+}
+
+/* ペーパークリップ（CSSで描画） */
+.paper-clip {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%) rotate(10deg);
+    width: 25px;
+    height: 60px;
+    border: 3px solid #94a3b8;
+    /* メタルグレー */
+    border-radius: 12px;
+    background: none;
+    z-index: 15;
+    pointer-events: none;
+}
+
+/* クリップの内側の線 */
+.paper-clip::after {
+    content: "";
+    position: absolute;
+    top: 10px;
+    left: 3px;
+    width: 13px;
+    height: 35px;
+    border: 3px solid #94a3b8;
+    border-radius: 8px;
+}
+
+/* 写真フレーム */
+.photo-frame {
+    width: 160px;
+    height: 200px;
+    background: #111;
+    /* 画像がない時の色 */
+    border: 6px solid #fff;
+    /* 白いフチ */
+    box-shadow: 3px 5px 15px rgba(0, 0, 0, 0.4);
+    /* 書類から浮いている影 */
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    transition: transform 0.3s ease;
+    cursor: crosshair;
+}
+
+/* マウスホバーで写真が少し傾く */
+.photo-frame:hover {
+    transform: rotate(-3deg);
+}
+
+/* 写真のオーバーレイ（マウスホバーで本性が浮かぶギミック） */
+.photo-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 0, 0, 0);
+    /* 通常は透明 */
+    transition: background 0.4s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ホバー時に赤黒くなり、ノイズが走る */
+.photo-frame:hover .photo-overlay {
+    background: rgba(139, 0, 0, 0.6);
+    /* 血のような赤 */
+    box-shadow: inset 0 0 30px #000;
+}
+
+/* 写真のキャプション */
+.photo-caption {
+    margin-top: 10px;
+    font-size: 0.75rem;
+    color: #4a5568;
+    font-style: italic;
+}
+
+/* --- 画像の割り当て（CSSの最後に記述） --- */
+#esther-photo {
+    background-image: url('エスターの可愛い写真.jpg');
+    /* ここにURLを */
+}
+
+/* ホバー時の「本性」画像（もしあれば） */
+.photo-frame:hover {
+    background-image: url('エスターの恐ろしい写真.jpg');
+}
+
+
+/* --- 既存の公文書デザイン（再掲） --- */
+.record-header {
+    border-bottom: 2px solid #2d3748;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    width: calc(100% - 200px);
+    /* 写真スペースを避ける */
+}
+
+.record-header h3 {
+    margin: 0;
+    font-size: 1.6rem;
+    font-weight: bold;
+    letter-spacing: 0.1em;
+}
+
+.record-header p {
+    font-size: 0.85rem;
+    color: #4a5568;
+    margin-top: 5px;
+}
+
+.record-body {
+    width: calc(100% - 200px);
+    /* 写真スペースを避ける */
+}
+
+.record-row {
+    margin-bottom: 18px;
+    display: flex;
+    align-items: baseline;
+    border-bottom: 1px dotted #a0aec0;
+    padding-bottom: 5px;
+}
+
+.record-row .label {
+    width: 110px;
+    font-weight: bold;
+    color: #2d3748;
+}
+
+.record-row .value {
+    flex: 1;
+    font-size: 0.95rem;
+}
+
+/* 黒塗りエフェクト */
+.redaction {
+    background-color: #1a202c;
+    /* 書類より少し濃いグレー */
+    color: #1a202c;
+    cursor: help;
+    transition: all 0.3s;
+    border-radius: 2px;
+    padding: 0 3px;
+}
+
+.redaction:hover {
+    color: #ff0000;
+    /* マウスを乗せると真実が浮かび上がる */
+    background-color: rgba(255, 0, 0, 0.1);
+}
+
+/* 観察記録ボックス */
+.observation-box {
+    margin-top: 40px;
+    background: rgba(0, 0, 0, 0.03);
+    padding: 25px;
+    border-left: 4px solid #4a5568;
+    width: 100%;
+    /* ここは全幅に */
+}
+
+.observation-box h4 {
+    margin: 0 0 15px 0;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.observation-box p {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: #2d3748;
+}
+
+/* 「死亡」の血判スタンプ */
+.stamp-blood {
+    position: absolute;
+    bottom: 50px;
+    right: 50px;
+    border: 5px solid #8b0000;
+    color: #8b0000;
+    padding: 10px 25px;
+    font-size: 2.2rem;
+    font-weight: bold;
+    transform: rotate(-15deg);
+    opacity: 0.8;
+    border-radius: 12px;
+    pointer-events: none;
+    letter-spacing: 0.1em;
+    z-index: 20;
+}
+
+
+
+
+
+
+
+/* ============================================================
+   MOBILE RESPONSIVE (768px以下)
+   ============================================================ */
+@media screen and (max-width: 768px) {
+
+    /* 1. ヘッダーの調整：余白を詰め、フォントを最適化 */
+    header,
+    .top-header {
+        padding: 40px 15px 30px;
+    }
+
+    .main-title {
+        font-size: 1.6rem;
+        /* 画面からはみ出さないサイズ */
+    }
+
+    .main-title span {
+        font-size: 0.7rem;
+        letter-spacing: 0.15em;
+        margin-top: 10px;
+    }
+
+    /* 導入文の装飾枠：左右の線を消し、上下のラインに変更（スマホで見やすく） */
+    .intro-text-wrapper {
+        max-width: 90%;
+        border-left: none;
+        border-right: none;
+        border-top: 1px solid #333;
+        border-bottom: 1px solid #333;
+        padding: 15px 0;
+        margin-top: 30px;
+    }
+
+    .intro-text-wrapper p {
+        font-size: 0.8rem;
+        text-align: center;
+        /* スマホでは中央寄せが綺麗です */
+    }
+
+    /* 2. カードリストの調整：!importantを上書きして縦並びに */
+    .movie-archive-list {
+        flex-direction: column !important;
+        /* 縦に並べる */
+        flex-wrap: wrap !important;
+        align-items: center;
+        gap: 30px;
+        padding: 10px;
+    }
+
+    /* 3. カード個別のデザイン：固定幅を解除 */
+    .movie-card {
+        flex: 0 0 auto;
+        /* 固定解除 */
+        width: 100%;
+        /* 画面幅に合わせる */
+        max-width: 320px;
+        /* 広がりすぎ防止 */
+        min-height: 400px;
+        margin: 0 auto;
+    }
+
+    .card-title {
+        font-size: 1.5rem;
+    }
+
+    /* 4. 制作中（コンジアム）カードの調整 */
+    .status-overlay {
+        font-size: 0.75rem;
+        padding: 4px 10px;
+        width: 80%;
+        /* スマホの狭い画面内で収まるように */
+        text-align: center;
+    }
+
+    /* ナビゲーションボタン（もしあれば）をスマホでは非表示にするか調整 */
+    .prev-btn,
+    .next-btn {
+        display: none;
+        /* スクロールで見せるため一旦非表示 */
+    }
+}
+
+
+/*--- 3. モーダルの調整 ---*/
+.modal-content {
+    width: 98%;
+    /* 画面端ギリギリまで使う */
+    margin: 2% auto;
+    /* 上下の余白を最小限に */
+    padding: 20px 15px;
+    /* 内側の余白を削る */
+}
+
+.close-btn {
+    right: 15px;
+    top: 15px;
+    background: rgba(0, 0, 0, 0.5);
+    /* 読みやすく背景を付ける */
+    padding: 5px 10px;
+    border-radius: 3px;
+}
+
+.modal-blood-title {
+    font-size: 1.5rem;
+    /* タイトルをスマホサイズに */
+    text-align: center;
+}
+
+/* イントロダクション・セクション */
+.intro-box {
+    padding: 20px 15px;
+}
+
+.intro-text {
+    font-size: 0.85rem;
+    line-height: 1.8;
+}
+
+/*--- 4. 家系図の調整（ここが重要！） ---*/
+.tree-container {
+    overflow-x: hidden;
+    /* 横スクロールさせず、縦に並べる方針 */
+    padding: 0;
+}
+
+.tree-level {
+    flex-direction: column;
+    /* 横並びを解除して縦に積み上げる */
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+    margin-bottom: 15px;
+    /* 世代間の余白 */
+}
+
+.char-node {
+    width: 85%;
+    /* 横幅を広げてタップしやすく */
+    max-width: 280px;
+    display: flex;
+    /* 写真と文字を横に並べるレイアウトへ変更 */
+    align-items: center;
+    text-align: left;
+    padding: 10px;
+}
+
+.char-img {
+    width: 60px;
+    /* 写真を小さくして横に配置 */
+    height: 60px;
+    margin-bottom: 0;
+    margin-right: 15px;
+    flex-shrink: 0;
+}
+
+.char-name {
+    font-size: 0.9rem;
+    margin: 0 0 5px 0;
+}
+
+.char-desc {
+    font-size: 0.75rem;
+}
+
+
+/* --- 特殊演出・接続線のスマホ最適化 --- */
+@media screen and (max-width: 768px) {
+
+    /* 1. DECEASEDスタンプの調整 */
+    .deceased::after {
+        font-size: 0.55rem;
+        /* スマホの狭いカード内でも収まるサイズ */
+        padding: 1px 4px;
+        top: 30%;
+        /* 写真エリアに被るように少し上に移動 */
+        left: 5%;
+        transform: rotate(-15deg);
+        /* 傾きを少し抑えて視認性を確保 */
+        border-width: 1px;
+    }
+
+    /* 2. カルトメンバーの強調（スマホではさらに毒々しく） */
+    .cult-member {
+        box-shadow: inset 0 0 10px rgba(255, 0, 0, 0.2);
+    }
+
+    .cult-highlight {
+        transform: scale(1.05);
+        /* スマホで1.1倍は大きすぎるので微調整 */
+    }
+
+    /* 3. 家系図の接続線（スマホ版：縦の流れへ） */
+    .connector-v {
+        height: 20px;
+        /* 縦の間隔を少し詰める */
+        background: #444;
+        /* 少し明るくして見やすく */
+    }
+
+    .connector-h {
+        width: 1px;
+        /* スマホでは横線も「縦の棒」として機能させる */
+        height: 15px;
+        margin: 5px 0;
+    }
+
+    /* 特殊なつながり（点線）も縦方向に */
+    .connector-h.dashed {
+        border-top: none;
+        border-left: 1px dashed #555;
+        width: 1px;
+        height: 20px;
+    }
+
+    /* 4. 背景のテクスチャをスマホで強調しすぎない */
+    .tree-container.medium-edition::after {
+        opacity: 0.03;
+        /* 画面が小さいとノイズに見えるため、より薄く */
+    }
+}
+
+
+/* --- 女神の継承：家系図スマホ最適化 --- */
+@media screen and (max-width: 768px) {
+
+    .family-tree.medium-edition {
+        margin: 40px auto;
+        padding-bottom: 20px;
+    }
+
+    /* 1. 血筋の並び：スマホでは縦に積む */
+    .bloodline {
+        flex-direction: column !important;
+        /* 横並びを解除 */
+        align-items: center;
+        gap: 15px;
+        /* 縦の間隔 */
+    }
+
+    /* 2. 遺影カードの調整：横長レイアウトへ */
+    .char-node {
+        width: 90%;
+        /* 画面幅に合わせる */
+        max-width: 280px;
+        display: flex;
+        /* 写真と文字を横に並べる */
+        align-items: center;
+        text-align: left;
+        /* 左寄せ */
+        padding: 10px;
+    }
+
+    /* 3. 写真エリアの調整 */
+    .char-img {
+        width: 70px;
+        /* 写真を小さくして左側に */
+        height: 80px;
+        margin-bottom: 0;
+        margin-right: 15px;
+        flex-shrink: 0;
+        /* 写真が潰れないように */
+    }
+
+    /* 4. テキストの調整 */
+    .char-name {
+        font-size: 0.9rem;
+        margin: 0 0 3px 0;
+    }
+
+    .char-desc {
+        font-size: 0.7rem;
+        line-height: 1.3;
+    }
+
+    /* 5. 接続線のスマホ対応：すべて「縦の棒」に統一 */
+    .connector-v {
+        height: 25px;
+        margin: 5px auto;
+    }
+
+    .connector-h {
+        width: 2px;
+        /* 水平線を「短い垂直線」に変換 */
+        height: 15px;
+        margin: 0 auto;
+        background: #3a2a1a;
+    }
+
+    /* 赤い点線（拒絶など）も縦方向に */
+    .connector-h.dashed {
+        border-top: none;
+        border-left: 1px dashed #600;
+        width: 1px;
+        height: 20px;
+    }
+
+    /* 6. 下部のノートボックス */
+    .family-tree.medium-edition .note-box {
+        margin-top: 40px;
+        width: 85%;
+        padding: 15px;
+        font-size: 0.8rem;
+    }
+}
+
+
+
+/* --- ストーリー・ネタバレ警告スマホ最適化 --- */
+@media screen and (max-width: 768px) {
+
+    /* 1. 起承転結アコーディオンの調整 */
+    .accordion-container {
+        gap: 10px;
+        /* スマホでは間隔を少し詰める */
+    }
+
+    .story-header {
+        padding: 15px;
+        /* タップしやすく、かつ画面を占領しすぎない */
+    }
+
+    .arc-step {
+        min-width: 30px;
+        /* ラベルを少しコンパクトに */
+        height: 30px;
+        font-size: 0.8rem;
+    }
+
+    .arc-title {
+        font-size: 0.9rem;
+        /* タイトルを1行に収まりやすく */
+    }
+
+    .story-body {
+        padding: 20px 15px;
+        /* 本文の余白を削って文字を大きく見せる */
+        font-size: 0.85rem;
+        line-height: 1.7;
+    }
+
+    /* 2. ネタバレ警告セクションの調整 */
+    .spoiler-wrapper {
+        margin: 40px 10px;
+        /* 左右に少し余白を作る */
+        max-width: 100%;
+    }
+
+    .spoiler-accordion summary {
+        padding: 15px;
+        flex-direction: column;
+        /* 警告とOPENボタンを縦に並べる */
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .warning-icon {
+        font-size: 1.5rem;
+        /* スマホに合わせてアイコンを縮小 */
+        margin-right: 15px;
+    }
+
+    .warning-text strong {
+        font-size: 0.95rem;
+    }
+
+    /* 「OPEN」ボタンを右下に配置 */
+    .click-to-open {
+        align-self: flex-end;
+        /* 右寄せにする */
+        width: auto;
+        padding: 8px 20px;
+    }
+
+    .spoiler-inner {
+        padding: 15px;
+        /* 内部の余白をスマホ用に調整 */
+    }
+}
+
+
+
+/* --- タイムライン・悪魔解説スマホ最適化 --- */
+@media screen and (max-width: 768px) {
+
+    /* 1. タイムラインの調整 */
+    .timeline-container {
+        margin: 30px 10px 30px 20px;
+        /* 左側の余白を少し詰める */
+        padding-left: 20px;
+    }
+
+    .timeline-item::before {
+        left: -25px;
+        /* 縦線に合わせて点の位置を微調整 */
+        width: 8px;
+        height: 8px;
+    }
+
+    .timeline-content {
+        padding: 15px;
+    }
+
+    .timeline-content:hover {
+        transform: translateX(5px);
+        /* スマホではズレすぎると画面からはみ出すため控えめに */
+    }
+
+    .timeline-content h4 {
+        font-size: 1rem;
+    }
+
+    /* 2. 悪魔解説セクションの調整 */
+    .demon-profile {
+        margin-top: 50px;
+        padding: 25px 15px;
+        /* 内側の余白をスリムに */
+    }
+
+    /* 画像とテキストを縦に並べる（もし横並びにしていた場合） */
+    .profile-body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 25px;
+    }
+
+    .paimon-img,
+    .paimon-seal {
+        max-width: 180px;
+        /* スマホ画面に合わせて少し縮小 */
+        margin: 0 auto;
+    }
+
+    .note-box {
+        font-size: 0.8rem;
+        padding: 15px;
+        line-height: 1.6;
+    }
+
+    /* 背景の巨大な紋章：スマホだと中央からズレたり圧迫感が出るためサイズ調整 */
+    .demon-profile::before {
+        width: 250px;
+        height: 250px;
+        opacity: 0.05;
+        /* 小さい画面では少しだけ濃くした方が雰囲気が出ます */
+    }
+
+    .rank {
+        font-size: 0.7rem;
+        letter-spacing: 0.15em;
+    }
+}
+
+
+
+/* --- 深層考察・配信情報・おすすめスマホ最適化（最新標準版） --- */
+@media screen and (max-width: 768px) {
+
+    /* 1. 深層考察：禁断の写本の調整 */
+    .deep-analysis {
+        padding: 30px 20px;
+        border-left: 5px solid #600;
+        /* ラインを少し細くして画面を広く使う */
+        margin-top: 30px;
+    }
+
+    .analysis-block h4 {
+        font-size: 1.2rem;
+        margin-bottom: 15px;
+    }
+
+    .analysis-block p {
+        font-size: 0.85rem;
+        line-height: 1.7;
+    }
+
+    /* 比較表：横スクロール対応（警告の出ない標準コード） */
+    .comparison-table {
+        overflow-x: auto;
+        /* 標準のスクロール機能のみを使用 */
+        margin: 20px 0;
+        border: 1px solid #2a1a0a;
+        /* 表の境界をはっきりさせる */
+    }
+
+    .comparison-table table {
+        min-width: 550px;
+        /* 文字が潰れないように表の最小幅を固定 */
+    }
+
+    .comparison-table th,
+    .comparison-table td {
+        padding: 12px 10px;
+        font-size: 0.8rem;
+    }
+
+    /* 2. 配信情報の調整 */
+    .streaming-info {
+        padding: 40px 15px;
+        margin: 40px 10px;
+    }
+
+    .info-title {
+        font-size: 1.3rem;
+        letter-spacing: 0.1em;
+    }
+
+    .stream-buttons {
+        gap: 12px;
+        /* ボタン同士の間隔を少し詰める */
+    }
+
+    .stream-btn {
+        padding: 18px 15px;
+        /* タップのしやすさを維持しつつ高さを微調整 */
+    }
+
+    .btn-action {
+        font-size: 1rem;
+    }
+
+    /* 3. おすすめ映画の調整 */
+    .recommend-grid {
+        grid-template-columns: 1fr;
+        /* 2列から1列へ強制変更 */
+        gap: 15px;
+    }
+
+    .recommend-card {
+        padding: 15px;
+    }
+}
+
+
+
+/* --- フッター・浮遊ボタンスマホ最適化 --- */
+@media screen and (max-width: 768px) {
+
+    /* 1. フッター全体の調整 */
+    .site-footer {
+        padding: 40px 15px 100px;
+        /* 下側に余裕を持たせ、ボタンと重ならないようにする */
+    }
+
+    .footer-logo {
+        font-size: 1.2rem;
+    }
+
+    .footer-message {
+        font-size: 0.75rem;
+        /* スマホで読みやすい小ぶりなサイズに */
+        margin-bottom: 30px;
+        padding: 0 10px;
+    }
+
+    /* 2. 浮遊ボタン（トップへ戻る / HOME）の調整 */
+    .back-to-top,
+    .home-button {
+        bottom: 20px;
+        /* 誤操作を防ぐため、PCより少し位置を下げる */
+        right: 20px;
+        width: 50px;
+        /* 指でタップしやすいよう、面積を少し広げる */
+        height: 50px;
+        background: rgba(10, 0, 0, 0.9);
+        /* スマホでは視認性を上げるため透明度を下げる */
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        /* 浮かび上がらせる */
+    }
+
+    /* ホバー（タップ）時の演出をスマホ向けにマイルドに */
+    .back-to-top:active,
+    .home-button:active {
+        background: #8b0000;
+        color: #fff;
+        transform: scale(0.9);
+        /* タップした瞬間に「ポチッ」と凹む演出 */
+    }
+
+    /* 3. コピーライトの調整 */
+    .footer-bottom {
+        padding-top: 20px;
+    }
+
+    .copyright {
+        font-size: 0.65rem;
+    }
+}
+
+
+
+
+
+
+/* --- 伏線回収セクション（EVIDENCE ARCHIVE）スマホ最適化 --- */
+@media screen and (max-width: 768px) {
+
+    /* 1. 閲覧注意バーの調整 */
+    .archive-summary {
+        padding: 15px;
+        font-size: 0.9rem;
+    }
+
+    /* 2. 全体コンテナの調整（2列 → 1列） */
+    .foreshadowing-section {
+        padding: 30px 15px;
+        margin: 30px 10px;
+    }
+
+    .archive-container {
+        grid-template-columns: 1fr;
+        /* 1列に強制 */
+        gap: 20px;
+    }
+
+    .archive-title {
+        font-size: 1.2rem;
+        margin-bottom: 30px;
+    }
+
+    /* 3. 「偽装 → 実体」のネスト構造を縦並びに変更 */
+    .archive-container.nested {
+        flex-direction: column;
+        /* 横並びを解除 */
+        gap: 10px;
+    }
+
+    .relation-arrow {
+        transform: rotate(90deg);
+        /* 矢印を「右向き」から「下向き」へ */
+        margin: 10px 0;
+        font-size: 1.2rem;
+    }
+
+    /* 4. 各アイテムの調整 */
+    .archive-item {
+        padding: 15px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .archive-subject {
+        font-size: 0.95rem;
+    }
+
+    .archive-text {
+        font-size: 0.8rem;
+        line-height: 1.5;
+    }
+
+    /* 5. 関連グループ（枠線付きエリア）の調整 */
+    .archive-group {
+        padding: 25px 10px 15px;
+        margin: 30px 0 10px;
+    }
+
+    .group-header {
+        font-size: 0.65rem;
+        width: 80%;
+        text-align: center;
+        white-space: nowrap;
+    }
+}
+
+
+
+/* --- 歴史的背景 ＆ エスター家系図スマホ最適化 --- */
+@media screen and (max-width: 768px) {
+
+    /* 1. 歴史的背景（3列 → 1列） */
+    .real-lore-section {
+        padding: 25px 15px;
+        margin: 30px 10px;
+    }
+
+    .lore-content {
+        grid-template-columns: 1fr;
+        /* 3列を1列へ */
+        gap: 15px;
+    }
+
+    /* 2. エスター家系図コンテナ：スマホでは縦長に拡張 */
+    .esther-tree-wrapper {
+        height: 1200px;
+        /* 絶対配置を維持しつつ、縦の空間を広げる */
+        overflow-y: auto;
+        /* 万が一のため縦スクロールを許可 */
+        overflow-x: hidden;
+    }
+
+    /* 3. モード切替スイッチ：スマホで見やすい位置へ */
+    .mode-switcher {
+        top: 15px;
+        left: 50%;
+        transform: translateX(-50%);
+        /* 中央配置 */
+        width: 90%;
+        justify-content: center;
+        background: rgba(0, 0, 0, 0.6);
+        padding: 10px;
+        border-radius: 30px;
+    }
+
+    /* 4. キャラクターノードの再配置（縦並びベースへ） */
+    .node {
+        width: 140px;
+        /* 少しコンパクトに */
+    }
+
+    .photo-box {
+        width: 90px;
+        height: 115px;
+    }
+
+    .name {
+        font-size: 0.95rem;
+    }
+
+    .desc,
+    .cause-reveal {
+        font-size: 0.7rem;
+    }
+
+    .x-mark {
+        font-size: 5rem;
+    }
+
+    /* --- スマホ用ポジション再計算 --- */
+    /* エスターを中心に、家族を上下に配置 */
+    .esther {
+        top: 45%;
+        left: 50%;
+    }
+
+    .john {
+        top: 5%;
+        left: 15%;
+    }
+
+    .kate {
+        top: 5%;
+        left: 85%;
+        transform: translateX(-100%);
+    }
+
+    .abigail {
+        top: 25%;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .daniel {
+        top: 75%;
+        left: 15%;
+    }
+
+    .max {
+        top: 75%;
+        left: 85%;
+        transform: translateX(-100%);
+    }
+
+    /* 5. 関係線のスマホ調整：複雑な線は非表示か簡略化 */
+    .lines-layer {
+        display: none;
+        /* スマホの狭い画面で線が重なると汚くなるため、一度非表示 */
+    }
+
+    /* 裏モード時のエスターの強調をスマホでも維持 */
+    .mode-reveal .esther {
+        transform: translate(-50%, -50%) scale(1.1);
+    }
+}
+
+
+/* --- エスター診療記録 ＆ 起承転結スマホ最適化 --- */
+@media screen and (max-width: 768px) {
+
+    /* 1. 起承転結アコーディオンの調整 */
+    .spoiler-alert {
+        padding: 15px;
+        gap: 15px;
+    }
+
+    .alert-icon {
+        font-size: 1.8rem;
+    }
+
+    .alert-text strong {
+        font-size: 0.95rem;
+    }
+
+    summary {
+        padding: 20px 15px;
+    }
+
+    .arc-label {
+        width: 45px;
+        font-size: 0.8rem;
+    }
+
+    .arc-subtitle {
+        font-size: 1rem;
+    }
+
+    .plus-icon {
+        right: 15px;
+        font-size: 1.2rem;
+    }
+
+    .arc-content {
+        padding: 0 15px 25px 60px;
+        /* 左余白を詰める */
+        font-size: 0.85rem;
+    }
+
+    /* UV真実（スマホではタップで光る演出を想定） */
+    .uv-truth {
+        font-size: 0.8rem;
+        padding: 12px;
+    }
+
+    /* 2. エスター診療記録（最難関の書類レイアウト） */
+    .medical-record-section {
+        padding: 10px;
+        margin: 30px auto;
+    }
+
+    .record-paper {
+        padding: 120px 20px 40px;
+        /* 写真を上に置くための上部余白 */
+    }
+
+    /* 写真エリアを右固定から「上部中央」へ移動 */
+    .photo-clip-area {
+        top: -40px;
+        /* 紙のフチに引っ掛けるように配置 */
+        right: auto;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 140px;
+    }
+
+    .photo-frame {
+        width: 120px;
+        height: 150px;
+        border-width: 4px;
+    }
+
+    .paper-clip {
+        width: 20px;
+        height: 50px;
+        top: -10px;
+    }
+
+    /* 書類ヘッダーとボディの幅制限を解除 */
+    .record-header,
+    .record-body {
+        width: 100%;
+        /* 横幅いっぱい使う */
+        text-align: center;
+    }
+
+    .record-header h3 {
+        font-size: 1.3rem;
+    }
+
+    .record-row {
+        flex-direction: column;
+        /* ラベルと値を縦に並べる */
+        align-items: flex-start;
+        gap: 2px;
+        padding-bottom: 8px;
+    }
+
+    .record-row .label {
+        font-size: 0.75rem;
+        opacity: 0.7;
+    }
+
+    .record-row .value {
+        font-size: 0.9rem;
+        width: 100%;
+    }
+
+    /* 黒塗り（Redaction）のスマホ調整：タップしやすく */
+    .redaction {
+        padding: 2px 5px;
+        line-height: 1.8;
+    }
+
+    /* 死亡スタンプを少し小さくして位置調整 */
+    .stamp-blood {
+        bottom: 20px;
+        right: 10px;
+        font-size: 1.5rem;
+        padding: 5px 15px;
+        border-width: 3px;
+    }
+
+    .observation-box {
+        padding: 15px;
+        margin-top: 30px;
+    }
+}
